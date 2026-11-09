@@ -1,0 +1,161 @@
+:root {
+  --bg: #0e0f12;
+  --panel: #191b20;
+  --panel-2: #22252c;
+  --text: #f2f3f5;
+  --muted: #9aa0aa;
+  --accent: #f7931a;
+  --accent-ink: #1a1102;
+  --ok: #3ccf7a;
+  --bad: #ff5a5a;
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
+
+body { display: flex; flex-direction: column; }
+
+/* ---- top bar ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--panel);
+}
+.brand { font-size: 22px; font-weight: 800; letter-spacing: .5px; }
+.brand span { color: var(--accent); }
+.demo-badge {
+  font-size: 12px; font-weight: 800; letter-spacing: 2px;
+  padding: 4px 10px; border-radius: 999px;
+  background: var(--accent); color: var(--accent-ink);
+}
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+.status-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--bad); transition: background .3s; }
+.status-dot.ok { background: var(--ok); }
+.lang {
+  font: inherit; font-weight: 700; color: var(--text);
+  background: var(--panel-2); border: 0; border-radius: 10px; padding: 8px 14px;
+}
+
+/* ---- screens ---- */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 22px;
+  text-align: center;
+  min-height: 0;
+}
+h1 { font-size: clamp(28px, 5vw, 46px); margin: 0; line-height: 1.15; }
+h2 { font-size: clamp(22px, 3.6vw, 32px); margin: 0; }
+p.lead { font-size: clamp(16px, 2.4vw, 22px); color: var(--muted); margin: 0; max-width: 34em; }
+
+.btn {
+  font: inherit; font-size: clamp(18px, 2.8vw, 24px); font-weight: 700;
+  border: 0; border-radius: var(--radius);
+  padding: 20px 34px; min-width: 240px;
+  background: var(--accent); color: var(--accent-ink);
+  transition: transform .08s, opacity .2s;
+}
+.btn:active { transform: scale(.97); }
+.btn:disabled { opacity: .35; }
+.btn.secondary { background: var(--panel-2); color: var(--text); }
+.btn.small { font-size: 16px; padding: 12px 20px; min-width: 0; }
+.row { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+.home-choices { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
+.choice {
+  width: min(320px, 80vw); padding: 30px 22px;
+  border: 0; border-radius: 24px;
+  background: var(--panel); color: var(--text); font: inherit;
+  display: flex; flex-direction: column; gap: 10px; align-items: center;
+}
+.choice .icon { font-size: 54px; }
+.choice .title { font-size: 26px; font-weight: 800; }
+.choice .sub { color: var(--muted); font-size: 16px; }
+.choice:active { background: var(--panel-2); }
+
+.total {
+  font-size: clamp(54px, 12vw, 104px); font-weight: 800; letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+}
+.total.bump { animation: bump .35s ease-out; }
+@keyframes bump { 0% { transform: scale(1.12); color: var(--accent); } 100% { transform: scale(1); } }
+.sats { font-size: clamp(18px, 3vw, 26px); color: var(--muted); }
+
+.inserted { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 640px; }
+.chip { background: var(--panel-2); border-radius: 999px; padding: 6px 14px; font-size: 16px; font-weight: 600; }
+.chip.coin::before { content: "● "; color: #d6b25e; }
+.chip.bill::before { content: "▬ "; color: var(--ok); }
+
+.hint-row { display: flex; gap: 14px; color: var(--muted); font-size: 15px; }
+.hint-row .on { color: var(--ok); }
+
+.camera-box {
+  width: min(320px, 60vw, 38vh); aspect-ratio: 1 / 1;
+  border-radius: 20px; background: #000;
+  border: 3px dashed var(--panel-2);
+}
+
+.summary { background: var(--panel); border-radius: var(--radius); padding: 10px 24px; min-width: min(520px, 90vw); }
+.summary .line { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; font-size: 19px; }
+.summary .line + .line { border-top: 1px solid var(--panel-2); }
+.summary .line span:first-child { color: var(--muted); }
+.summary .mono { font-family: ui-monospace, Consolas, monospace; font-size: 16px; word-break: break-all; text-align: right; }
+
+.spinner {
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 7px solid var(--panel-2); border-top-color: var(--accent);
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.steps { list-style: none; padding: 0; margin: 0; font-size: 18px; color: var(--muted); }
+.steps li.done { color: var(--ok); }
+.steps li.done::before { content: "✓ "; }
+
+.big-icon { font-size: 92px; line-height: 1; }
+.big-icon.ok { color: var(--ok); }
+.cash-anim { font-size: 80px; animation: slide 1.4s ease-in-out infinite; }
+@keyframes slide { 0%, 100% { transform: translateY(-10px); } 50% { transform: translateY(14px); } }
+
+.error { color: var(--bad); font-size: 17px; }
+
+.demo-footer { text-align: center; font-size: 13px; color: var(--muted); padding: 10px 16px 14px; }
+
+/* ---- kiosk.js mock-mode helpers (only present outside the Android host) ---- */
+.k1-mock-panel {
+  position: fixed; right: 12px; bottom: 12px; z-index: 1000;
+  background: rgba(20, 22, 27, .96); border: 1px solid #333; border-radius: 14px;
+  padding: 10px; display: flex; flex-direction: column; gap: 8px; font-size: 13px;
+  max-width: min(520px, calc(100vw - 24px));
+}
+.k1-mock-title { color: var(--muted); }
+.k1-mock-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.k1-mock-row button { font: inherit; padding: 6px 10px; border-radius: 8px; border: 0; background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.k1-mock-row button:disabled { background: #333; color: #777; }
+.k1-mock-row input { flex: 1; min-width: 160px; font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid #444; background: #111; color: var(--text); }
+.k1-mock-camera {
+  position: fixed; z-index: 999; display: none; align-items: center; justify-content: center;
+  padding: 16px; text-align: center; color: #ccc; font-size: 14px;
+  background: repeating-linear-gradient(45deg, #1a1a1a 0 12px, #222 12px 24px); border-radius: 20px;
+}
+.k1-mock-flash {
+  position: fixed; left: 50%; top: 20px; transform: translateX(-50%); z-index: 1001;
+  background: var(--bad); color: #fff; padding: 10px 18px; border-radius: 10px; font-weight: 700;
+}

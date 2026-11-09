@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- width=device-width matters: the host maps CSS px to screen px with the display density
+       when it places the native camera preview (CameraQrScanner.place). -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>K1 Demo Kiosk</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">K1 <span>Bitcoin</span></div>
+    <div class="demo-badge" id="demo-badge">DEMO</div>
+    <div class="topbar-right">
+      <span class="status-dot" id="status-dot" title="K1 cash devices"></span>
+      <button class="lang" id="lang-toggle" type="button">ES</button>
+    </div>
+  </header>
+  <main id="app"></main>
+  <footer class="demo-footer" id="demo-footer"></footer>
+
+  <script src="kiosk.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>
