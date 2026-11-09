@@ -1,0 +1,33 @@
+/*
+ * kiosk.css: styles for kiosk.js's mock mode (the on-screen panel shown in a normal browser).
+ * Self-contained: uses your page's --accent / --accent-ink / --text / --muted / --bad if
+ * defined, otherwise the fallbacks below. Nothing here is used inside the Android host.
+ */
+.k1-mock-panel {
+  position: fixed; right: 12px; bottom: 12px; z-index: 1000;
+  background: rgba(20, 22, 27, .96); border: 1px solid #333; border-radius: 14px;
+  padding: 10px; display: flex; flex-direction: column; gap: 8px;
+  font: 13px system-ui, sans-serif; color: var(--text, #eee);
+  max-width: min(520px, calc(100vw - 24px));
+}
+.k1-mock-title { color: var(--muted, #999); }
+.k1-mock-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.k1-mock-row button {
+  font: inherit; padding: 6px 10px; border-radius: 8px; border: 0; font-weight: 700;
+  background: var(--accent, #f7931a); color: var(--accent-ink, #111);
+}
+.k1-mock-row button:disabled { background: #333; color: #777; }
+.k1-mock-row input {
+  flex: 1; min-width: 160px; font: inherit; padding: 6px 8px; border-radius: 8px;
+  border: 1px solid #444; background: #111; color: var(--text, #eee);
+}
+.k1-mock-camera {
+  position: fixed; z-index: 999; display: none; align-items: center; justify-content: center;
+  padding: 16px; text-align: center; color: #ccc; font: 14px system-ui, sans-serif;
+  background: repeating-linear-gradient(45deg, #1a1a1a 0 12px, #222 12px 24px); border-radius: 20px;
+}
+.k1-mock-flash {
+  position: fixed; left: 50%; top: 20px; transform: translateX(-50%); z-index: 1001;
+  background: var(--bad, #e5484d); color: #fff; padding: 10px 18px; border-radius: 10px;
+  font: 700 14px system-ui, sans-serif;
+}
